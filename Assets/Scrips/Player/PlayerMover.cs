@@ -13,6 +13,8 @@ public class PlayerMover : MonoBehaviour
     SpriteRenderer sprite;
     CapsuleCollider2D collider;
 
+    IMonster monster;
+
     float hSpeed;
     float vSpeed;
     bool _isJump;
@@ -79,25 +81,41 @@ public class PlayerMover : MonoBehaviour
     {
         item.Drops();
     }
-    private void Attack(Forge forge)
+    private void Attack(IMonster monster)
     {
         rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        forge.Died();
+        monster.Died();
+        Debug.Log("Attck");
     }
+   
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject.tag == "Monster")
+        Forge froge = other.gameObject.GetComponent<Forge>();
+        Opossum opossum = other.gameObject.GetComponent<Opossum>();
+        if (other.gameObject.tag == "Monster")
         {
+            Debug.Log("Monster");
             if(transform.position.y > other.transform.position.y)
             {
-                Forge froge = other.gameObject.GetComponent<Forge>();
-                Attack(froge);
+                
+                if(other.gameObject.name == "Froge")
+                {
+                    Debug.Log("개구리");
+                    Attack(froge);
+                }
+                if (other.gameObject.name == "Opossum")
+                {
+                    Debug.Log("쥐");
+                    Attack(opossum);
+                }
+                
+               
+                
             }
         }
        
         if (other.gameObject.tag == "Item")
         {
-            
             Debug.Log("Drops");
             Item item = other.gameObject.GetComponent<Item>();
             ItemGet(item);
