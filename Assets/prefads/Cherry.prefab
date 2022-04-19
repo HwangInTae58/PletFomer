@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 772010169500703740}
   - component: {fileID: 772010169500703743}
   - component: {fileID: 772010169500703742}
+  - component: {fileID: -3622162470184660891}
   m_Layer: 11
   m_Name: Cherry
   m_TagString: Untagged
@@ -92,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 772010169500703713}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f051edae593d25a4cabaf4273d590bfa, type: 2}
+  m_Controller: {fileID: 9100000, guid: f25f25afd638d5148ac1632b5e84cab4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -101,3 +102,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &-3622162470184660891
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772010169500703713}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.65625

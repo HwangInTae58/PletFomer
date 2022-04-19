@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Animator anim;
+
+    private void Start()
     {
-        
+        if(gameObject.layer == 10)
+        {
+            anim.SetBool("Gem", true);
+        }
+        else if(gameObject.layer == 11)
+        {
+            anim.SetBool("Gem", false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

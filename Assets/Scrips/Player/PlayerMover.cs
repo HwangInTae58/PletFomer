@@ -10,12 +10,13 @@ public class PlayerMover : MonoBehaviour
     Rigidbody2D rigidbody;
     Animator anim;
     SpriteRenderer sprite;
+    CapsuleCollider2D collider;
 
     float hSpeed;
     float vSpeed;
     bool _isJump;
 
-    bool isJump
+    bool isGround
     {
         set
         {
@@ -32,14 +33,25 @@ public class PlayerMover : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponent<CapsuleCollider2D>();
     }
     private void Update()
     {
+        Move();
         Jump();
     }
     private void FixedUpdate()
     {
-        Move();
+        Vector2 startvec = new Vector2(collider.transform.position.x, collider.transform.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(startvec,Vector2.down,1.5f, LayerMask.GetMask("Ground"));
+        if(null != hit.collider) 
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
+        }
     }
     private void Move()
     {
@@ -53,21 +65,13 @@ public class PlayerMover : MonoBehaviour
     }
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isJump == false)
+        if (Input.GetButtonDown("Jump") && isGround == true)
         {
             rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            isJump = true;
+            
            // anim.SetBool("IsJump", isJump);
         }
         vSpeed = rigidbody.velocity.y;
         anim.SetFloat("vSpeed", vSpeed);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.layer == 9)
-        {
-            isJump = false;
-            //anim.SetBool("IsJump", isJump);
-        }
     }
 }
