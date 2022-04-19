@@ -98,14 +98,14 @@ public class PlayerMover : MonoBehaviour
             if(transform.position.y > other.transform.position.y)
             {
                 
-                if(other.gameObject.name == "Froge")
+                if(other.gameObject.layer == 12)
                 {
-                    Debug.Log("개구리");
+                    Debug.Log("개구리 사망");
                     Attack(froge);
                 }
-                if (other.gameObject.name == "Opossum")
+                if (other.gameObject.layer == 13)
                 {
-                    Debug.Log("쥐");
+                    Debug.Log("쥐 사망");
                     Attack(opossum);
                 }
                 

@@ -44,7 +44,6 @@ public class Opossum : MonoBehaviour , IMonster
     public void Died()
     {
         anime.SetTrigger("Die");
-        Debug.Log("쥐사망");
     }
     public void OnEndDieEffect()
     {
