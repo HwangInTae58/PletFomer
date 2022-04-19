@@ -7,6 +7,7 @@ public class PlayerMover : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 5f;
 
+    
     Rigidbody2D rigidbody;
     Animator anim;
     SpriteRenderer sprite;
@@ -74,4 +75,33 @@ public class PlayerMover : MonoBehaviour
         vSpeed = rigidbody.velocity.y;
         anim.SetFloat("vSpeed", vSpeed);
     }
+    private void ItemGet(Item item)
+    {
+        item.Drops();
+    }
+    private void Attack(Forge forge)
+    {
+        rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        forge.Died();
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Monster")
+        {
+            if(transform.position.y > other.transform.position.y)
+            {
+                Forge froge = other.gameObject.GetComponent<Forge>();
+                Attack(froge);
+            }
+        }
+       
+        if (other.gameObject.tag == "Item")
+        {
+            
+            Debug.Log("Drops");
+            Item item = other.gameObject.GetComponent<Item>();
+            ItemGet(item);
+        }
+    }
+   
 }
